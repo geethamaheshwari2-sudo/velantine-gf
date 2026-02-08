@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<title>මගේ ආදරේ ❤️ Samudri</title>
+<style>
+/* Body and background */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: url('photo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Pages */
+.page {
+  display: none;
+  min-height: 100vh;
+  background: rgba(0,0,0,0.6);
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.page.active {
+  display: block;
+}
+
+.box {
+  max-width: 700px;
+  margin: auto;
+  background: rgba(255,255,255,0.15);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+h1 { margin-bottom: 20px; }
+p { font-size: 1.2em; line-height: 1.8; }
+
+button {
+  margin: 10px;
+  padding: 12px 30px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: #e6005c;
+  cursor: pointer;
+}
+
+/* Floating emojis */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 24px;
+  animation: floatUp 6s linear forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+}
+
+/* Text area for personal message */
+textarea {
+  width: 90%;
+  height: 80px;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  body { background-position: top center; }
+  .box { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background Music -->
+<audio id="bgMusic" src="love.mp3" loop></audio>
+
+<!-- Start Page -->
+<div class="page active" id="startPage">
+  <div class="box">
+    <h1>මගේ ආදරේ Samudri ❤️</h1>
+    <p>Click කරන්න 🎵 music play කරන්න සහ adventure start කරන්න</p>
+    <button onclick="startExperience()">Play Music & Begin 🌸</button>
+  </div>
+</div>
+
+<!-- Page 1 -->
+<div class="page" id="page1">
+  <div class="box">
+    <h1>❤️ මගේ ආදරණීය Samudri ❤️</h1>
+    <p>
+      මේක මම හදලා තියෙන්නේ මගේ හදවතෙන්ම <br>
+      <strong>ඔයා වෙනුවෙන්</strong> 💖 <br><br>
+      මගේ ලෝකය ලස්සන කළ එකම කෙනා Samudriයි…
+    </p>
+    <button onclick="nextPage(2)">ඉදිරියට යමු 🌸</button>
+  </div>
+</div>
+
+<!-- Page 2 -->
+<div class="page" id="page2">
+  <div class="box">
+    <h1>🌷 Samudri ගැන 🌷</h1>
+    <p>
+      ඔයාගේ හිනාව මගේ දුක සතුටක් කරනවා. <br><br>
+      ඔයාගේ කතා, ඔයාගේ හිත, ඔයාගේ ආදරය… <br><br>
+      ඒ හැමදේම මට අතිශය වටිනායි ❤️
+    </p>
+    <button onclick="nextPage(3)">තවත් 💕</button>
+  </div>
+</div>
+
+<!-- Page 3 - Personal message -->
+<div class="page" id="page3">
+  <div class="box">
+    <h1>💌 මගේ ප්‍රශ්නය 💌</h1>
+    <p>Samudri, ඔයා මගේ Valentine වෙන්න කැමතිද? 💖</p>
+    <textarea id="myMessage" placeholder="ඔයාගේ වචන මෙහි type කරන්න..."></textarea>
+    <br>
+    <button onclick="sayYesWithMessage()">Send ❤️</button>
+  </div>
+</div>
+
+<script>
+/* Floating emojis */
+const emojis = ['❤️','💖','💗','🌸','✨','💌'];
+function createHeart(){
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+  heart.style.left = Math.random()*100 + 'vw';
+  heart.style.fontSize = (20 + Math.random()*20) + 'px';
+  heart.style.animationDuration = (4 + Math.random()*3) + 's';
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),7000);
+}
+let heartInterval;
+function startHearts(){ heartInterval = setInterval(createHeart, 500); }
+
+/* Page navigation */
+function nextPage(num){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page' + num).classList.add('active');
+}
+
+/* Start music & first page */
+function startExperience(){
+  const music = document.getElementById('bgMusic');
+  music.volume = 0.5;
+  music.play().catch(err => console.log('Autoplay blocked'));
+  nextPage(1);
+  startHearts();
+}
+
+/* Final page with personal message */
+function sayYesWithMessage(){
+  const userMessage = document.getElementById('myMessage').value;
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      background: rgba(0,0,0,0.7);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      font-family:Arial;
+      text-align:center;
+      padding:20px;">
+      <div>
+        <h1>මම දැනගෙන හිටියා 💕</h1>
+        <p style="font-size:1.5em;">Happy Valentine’s Day Samudri<br>මගේ ආදරේ 🌹</p>
+        <p style="font-size:1.2em; margin-top:20px;">${userMessage}</p>
+      </div>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
